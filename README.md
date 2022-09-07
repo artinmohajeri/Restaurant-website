@@ -1,6 +1,6 @@
-'Restaurant-website'
+*Restaurant-website*
 
-this is a website for yamifood restaurant.
+*this is a website for yamifood restaurant.*
 
 write these commands in your terminal first.
 
