@@ -62,7 +62,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="{% url 'blog' %}">blog</a>
-								<a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a>
+								{% comment %} <a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a> {% endcomment %}
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -101,24 +101,23 @@
 					<div class="blog-inner-details-page">
 						<div class="blog-inner-box">
 							<div class="side-blog-img">
-								<img class="img-fluid" src="{% static 'images/inner-blog-img.jpg' %}" alt="">							
+								{% if blog.image %}
+								<img class="img-fluid" src="{{blog.image.url}}" alt="">							
+								{% endif %}
 								<div class="date-blog-up">
-									27 Fab
+									{{blog.date}}
 								</div>
 							</div>
 							<div class="inner-blog-detail details-page">
-								<h3>Duis feugiat neque sed dolor cursus, sed lacinia nisl pretium.</h3>
+								<h3>{{blog.title}}</h3>
 								<ul>
-									<li><i class="zmdi zmdi-account"></i>Posted By : <span>Rubel Ahmed</span></li>
+									<li><i class="zmdi zmdi-account"></i>Posted By : <span>{{blog.author}}</span></li>
 									<li>|</li>
-									<li><i class="zmdi zmdi-time"></i>Time : <span>11.30 am</span></li>
+									<li><i class="zmdi zmdi-time"></i>date : <span>{{blog.date}}</span></li>
 								</ul>
-								<p>Vestibulum quis ultricies enim. Quisque eu sapien a erat congue lacinia bibendum ac massa. Morbi vehicula aliquet libero sit amet dictum. Integer vel mauris non magna consequat porttitor. Nulla facilisi. Suspendisse posuere, elit eu fringilla congue, turpis magna tempor odio, a placerat magna tortor a mauris. Phasellus lobortis turpis dui, eget mollis ex vestibulum auctor. Nunc viverra leo ut accumsan aliquet. Maecenas aliquam dolor eget felis bibendum blandit.</p>
-								<p>Nunc iaculis, massa eget pellentesque mollis, nulla mauris aliquam eros, vitae condimentum leo nisl ut purus. Etiam nibh diam, vehicula non tincidunt id, consequat nec ex. Praesent vulputate sapien non tellus ultrices hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus pellentesque arcu erat. Curabitur dapibus fringilla porta. Sed in neque sit amet ante feugiat blandit. Nulla fringilla purus diam, cursus venenatis diam luctus nec.</p>
 								<blockquote>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non feugiat lacus. Nunc nisi velit, consectetur vitae ex porttitor, placerat scelerisque mauris. Phasellus sit amet tincidunt metus, quis tempus ex. Quisque in lorem ut mi ullamcorper suscipit eu nec purus. Nam maximus sagittis iaculis.</p>
+								<p>{{blog.body}}</p>
 								</blockquote>
-								<p>Vestibulum quis ultricies enim. Quisque eu sapien a erat congue lacinia bibendum ac massa. Morbi vehicula aliquet libero sit amet dictum. Integer vel mauris non magna consequat porttitor. Nulla facilisi. Suspendisse posuere, elit eu fringilla congue, turpis magna tempor odio, a placerat magna tortor a mauris.</p>
 							</div>
 						</div>
 						<div class="blog-comment-box">
@@ -213,18 +212,35 @@
 						<h3>Categories</h3>
 						<div class="blog-categories">
 							<ul>
-								<li><a href="#"><span>Food</span></a></li>
-								<li><a href="#"><span>Pizza</span></a></li>
-								<li><a href="#"><span>Drink</span></a></li>
-								<li><a href="#"><span>Lorem Sit</span></a></li>
-								<li><a href="#"><span>Burger</span></a></li>
-								<li><a href="#"><span>Music</span></a></li>
+								{% for category in categorys %}
+								<li><a href="#"><span>{{category.title}}</span></a></li>
+								{% endfor %}
 							</ul>
+
 						</div>
 						<h3>Recent Post</h3>
 						<div class="post-box-blog">
 							<div class="recent-post-box">
+
+								{% for blog in recent %}
 								<div class="recent-box-blog">
+									<div class="recent-img">
+										{% if blog.image %}
+										<img class="img-fluid" width='100px' src="{{blog.image.url}}" alt="">
+										{% endif %}
+									</div>
+									<div class="recent-info">
+										<ul>
+											<li><i class="zmdi zmdi-account"></i>Posted By : <span>{{blog.author}}</span></li>
+											<li>|</li>
+											<li><i class="zmdi zmdi-time"></i>Time : <span>{{blog.time}}</span></li>
+										</ul>
+										<h4>{{blog.title}}</h4>
+									</div>
+								</div>
+								{% endfor %}
+
+								{% comment %} <div class="recent-box-blog">
 									<div class="recent-img">
 										<img class="img-fluid" src="{% static 'images/post-img-01.jpg' %}" alt="">
 									</div>
@@ -236,57 +252,15 @@
 										</ul>
 										<h4>Duis feugiat neque sed dolor cursus, sed lacinia nisl pretium.</h4>
 									</div>
-								</div>
-								<div class="recent-box-blog">
-									<div class="recent-img">
-										<img class="img-fluid" src="{% static 'images/post-img-02.jpg' %}" alt="">
-									</div>
-									<div class="recent-info">
-										<ul>
-											<li><i class="zmdi zmdi-account"></i>Posted By : <span>Rubel Ahmed</span></li>
-											<li>|</li>
-											<li><i class="zmdi zmdi-time"></i>Time : <span>11.30 am</span></li>
-										</ul>
-										<h4>Duis feugiat neque sed dolor cursus, sed lacinia nisl pretium.</h4>
-									</div>
-								</div>
-								<div class="recent-box-blog">
-									<div class="recent-img">
-										<img class="img-fluid" src="{% static 'images/post-img-03.jpg' %}" alt="">
-									</div>
-									<div class="recent-info">
-										<ul>
-											<li><i class="zmdi zmdi-account"></i>Posted By : <span>Rubel Ahmed</span></li>
-											<li>|</li>
-											<li><i class="zmdi zmdi-time"></i>Time : <span>11.30 am</span></li>
-										</ul>
-										<h4>Duis feugiat neque sed dolor cursus, sed lacinia nisl pretium.</h4>
-									</div>
-								</div>
-								<div class="recent-box-blog">
-									<div class="recent-img">
-										<img class="img-fluid" src="{% static 'images/post-img-01.jpg' %}" alt="">
-									</div>
-									<div class="recent-info">
-										<ul>
-											<li><i class="zmdi zmdi-account"></i>Posted By : <span>Rubel Ahmed</span></li>
-											<li>|</li>
-											<li><i class="zmdi zmdi-time"></i>Time : <span>11.30 am</span></li>
-										</ul>
-										<h4>Duis feugiat neque sed dolor cursus, sed lacinia nisl pretium.</h4>
-									</div>
-								</div>
+								</div> {% endcomment %}
 							</div>
 						</div>
 						<h3>Recent Tag</h3>
 						<div class="blog-tag-box">
 							<ul class="list-inline tag-list">
-								<li class="list-inline-item"><a href="#">Food</a></li>
-								<li class="list-inline-item"><a href="#">Drink</a></li>
-								<li class="list-inline-item"><a href="#">Nature</a></li>
-								<li class="list-inline-item"><a href="#">Italian</a></li>
-								<li class="list-inline-item"><a href="#">Bootstrap4</a></li>
-								<li class="list-inline-item"><a href="#">Fashion</a></li>
+								{% for tag in tags %}
+									<li class="list-inline-item"><a href="#">{{tag.title}}</a></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
@@ -306,7 +280,7 @@
 					<div class="overflow-hidden">
 						<h4>Phone</h4>
 						<p class="lead">
-							+01 123-456-4590
+							+98 919 227 8018
 						</p>
 					</div>
 				</div>
@@ -315,7 +289,7 @@
 					<div class="overflow-hidden">
 						<h4>Email</h4>
 						<p class="lead">
-							yourmail@gmail.com
+							artinmohajeri@gmail.com
 						</p>
 					</div>
 				</div>
@@ -324,7 +298,7 @@
 					<div class="overflow-hidden">
 						<h4>Location</h4>
 						<p class="lead">
-							800, Lorem Street, US
+							Tehran Iran
 						</p>
 					</div>
 				</div>
@@ -350,9 +324,9 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<h3>Contact information</h3>
-					<p class="lead">Ipsum Street, Lorem Tower, MO, Columbia, 508000</p>
-					<p class="lead"><a href="#">+01 2000 800 9999</a></p>
-					<p><a href="https://gmail.com"> info@admin.com</a></p>
+					<p class="lead">Tehran Iran</p>
+					<p class="lead"><a href="#">+98 919 227 8018</a></p>
+					<p><a href="https://gmail.com"> artinmohajeri@gmail.com</a></p>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<h3>Subscribe</h3>
@@ -374,15 +348,6 @@
 			</div>
 		</div>
 		
-		<div class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<p class="company-name"><a href="#">Yamifood Restaurant</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
 		
 	</footer>
 	<!-- End Footer -->

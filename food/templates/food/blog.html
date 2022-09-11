@@ -62,7 +62,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="{% url 'blog' %}">blog</a>
-								<a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a>
+								{% comment %} <a class="dropdown-item" href="{% url 'blog_details'  %}">blog Single</a> {% endcomment %}
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -96,169 +96,28 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row">
+				{% for blog in blogs %}
 				<div class="col-lg-4 col-md-6 col-12">
 					<div class="blog-box-inner">
 						<div class="blog-img-box">
 							<img class="img-fluid" src="{% static 'images/blog-img-01.jpg' %}" alt="">
 						</div>
 						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
+							<h4>{{blog.title}}</h4>
 							<ul>
-								<li><span>Post by Admin</span></li>
+								<li><span>Post by {{blog.author}}</span></li>
 								<li>|</li>
-								<li><span>27 February 2018</span></li>
+								<li><span>{{blog.date}}</span></li>
 							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
+							<p>{{blog.body | truncatewords:40}}</p>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' id=blog.id %}">Read More</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog--02.jpgimg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-03.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-04.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-05.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-06.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-07.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-08.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="{% static 'images/blog-img-09.jpg' %}" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>Duis feugiat neque sed dolor cursus.</h4>
-							<ul>
-								<li><span>Post by Admin</span></li>
-								<li>|</li>
-								<li><span>27 February 2018</span></li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' %}">Read More</a>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
+				
 			</div>
 		</div>
 	</div>
@@ -273,7 +132,7 @@
 					<div class="overflow-hidden">
 						<h4>Phone</h4>
 						<p class="lead">
-							+01 123-456-4590
+							+98 919 227 8018
 						</p>
 					</div>
 				</div>
@@ -282,7 +141,7 @@
 					<div class="overflow-hidden">
 						<h4>Email</h4>
 						<p class="lead">
-							yourmail@gmail.com
+							artinmohajeri@gmail.com
 						</p>
 					</div>
 				</div>
@@ -291,7 +150,7 @@
 					<div class="overflow-hidden">
 						<h4>Location</h4>
 						<p class="lead">
-							800, Lorem Street, US
+							Tehran Iran
 						</p>
 					</div>
 				</div>
@@ -317,9 +176,9 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<h3>Contact information</h3>
-					<p class="lead">Ipsum Street, Lorem Tower, MO, Columbia, 508000</p>
-					<p class="lead"><a href="#">+01 2000 800 9999</a></p>
-					<p><a href="https://gmail.com"> info@admin.com</a></p>
+					<p class="lead">Tehran Iran</p>
+					<p class="lead"><a href="#">+98 919 227 8018</a></p>
+					<p><a href="https://gmail.com"> artinmohajeri@gmail.com</a></p>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<h3>Subscribe</h3>
@@ -340,16 +199,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<p class="company-name"><a href="#">Yamifood Restaurant</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
+	
 		
 	</footer>
 	<!-- End Footer -->

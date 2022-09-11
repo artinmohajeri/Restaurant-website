@@ -66,7 +66,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="{% url 'blog' %}">blog</a>
-								<a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a>
+								{% comment %} <a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a> {% endcomment %}
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -103,27 +103,31 @@
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12">
 					<div class="contact-block">
-						<form id="contactForm">
+						<form method="post">
+							{% csrf_token %}
 							<div class="row">
 								<div class="col-md-6">
 									<h3>Book a table</h3>
+
 									<div class="col-md-12">
 										<div class="form-group">
-											<input id="input_date" class="datepicker picker__input form-control" name="date" type="date" value="" equired data-error="Please enter Date">
+											<input id="input_date" name="date" class="datepicker picker__input form-control" name="date" type="text" value="" equired data-error="Please enter Date">
+											<div class="help-block with-errors"></div>
+										</div>                                 
+									</div>
+
+									
+									<div class="col-md-12">
+										<div class="form-group">
+											<input id="input_time" name="time" class="time form-control picker__input" required data-error="Please enter time">
 											<div class="help-block with-errors"></div>
 										</div>                                 
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="time" id="input_time" class="time form-control picker__input" required data-error="Please enter time">
-											<div class="help-block with-errors"></div>
-										</div>                                 
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<select class="custom-select d-block form-control" id="person" required data-error="Please select Person">
-											  <option disabled selected>number of People</option>
-											  <option value="1">1</option>
+											<select name="number_of_people" class="custom-select d-block form-control" id="person" required data-error="Please select Person">
+												<option disabled selected>Select Person*</option>
+												<option value="1">1</option>
 											  <option value="2">2</option>
 											  <option value="3">3</option>
 											  <option value="4">4</option>
@@ -151,13 +155,16 @@
 											<div class="help-block with-errors"></div>
 										</div> 
 									</div>
+
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="tel" placeholder="Your Phone Numbar" id="phone" class="form-control" name="phone" required data-error="Please enter your Phone Numbar">
+											<input type="text" placeholder="Your Numbar" id="phone" class="form-control" name="phone_number" required data-error="Please enter your Numbar">
 											<div class="help-block with-errors"></div>
 										</div> 
 									</div>
 								</div>
+
+
 								<div class="col-md-12">
 									<div class="submit-button text-center">
 										<button class="btn btn-common" id="submit" type="submit">Book Table</button>
@@ -265,6 +272,7 @@
 					<h3>Subscribe</h3>
 					<div class="subscribe_form">
 						<form class="subscribe_form">
+							{% csrf_token %}
 							<input name="EMAIL" id="subs-email" class="form_input" placeholder="Email Address..." type="email">
 							<button type="submit" class="submit">SUBSCRIBE</button>
 							<div class="clearfix"></div>

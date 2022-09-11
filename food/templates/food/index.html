@@ -63,7 +63,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="{% url 'blog' %}">blog</a>
-								<a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a>
+								{% comment %} <a class="dropdown-item" href="{% url 'blog_details' %}">blog Single</a> {% endcomment %}
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -187,7 +187,7 @@
 							<div class="why-text">
 								<h4>{{food.name}}</h4>
 								<p>{{food.description}}</p>
-								<h5>{{food.price}} $</h5>
+								<h5>$ {{food.price}}</h5>
 							</div>
 						</div>
 					</div>
