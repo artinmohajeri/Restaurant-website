@@ -30,6 +30,7 @@ class Reservation(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=25)
+    
     def __str__(self):
         return f"{self.name}  |  {self.email}  |  {self.date}"
 
@@ -42,7 +43,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='food/', null=True, blank=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="blog", blank=True, null=True)
-    tag = models.ManyToManyField("Tag", related_name="tags",null=True, blank=True)
+    tags = models.ManyToManyField("Tag", related_name="blogs", blank=True)
 
     def __str__(self):
         return f"{self.title}  |  {self.body[:40]}  |  {self.date}"
@@ -67,3 +68,28 @@ class Tag(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+# _________________________________________________________________________________________________________
+
+class Comment(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    time = models.TimeField(auto_now_add=True, auto_now=False)
+    show_text = models.BooleanField(default=False)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name}  |  {self.email}  |  {self.message}"
+
+# _________________________________________________________________________________________________________
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    number_of_people = models.PositiveIntegerField(default=1)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}  |  {self.email}  |  {self.message[:50]}"

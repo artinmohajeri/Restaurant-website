@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Foods,Reservation,Blog,Category,Tag
+from .models import Foods,Reservation,Blog,Category,Tag,Comment,Contact
 # Register your models here.
 
 
@@ -21,6 +21,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
     pass
 
 
