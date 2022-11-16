@@ -109,120 +109,31 @@
 				</div>
 			</div>
 				
+			<!-- first menu item -->
 			<div class="row special-list">
-				<div class="col-lg-4 col-md-6 special-grid drinks">
+				{% for food in foods %}
+				<div class="col-lg-4 col-md-6 special-grid {{food.type}}">
 					<div class="gallery-single fix">
-						<img src="{% static 'images/img-01.jpg' %}" class="img-fluid" alt="Image">
+						<img src="{{food.picture.url}}" class="img-fluid" alt="Image">
 						<div class="why-text">
-							<h4>Special Drinks 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $7.79</h5>
+							<h4>{{food.name}}</h4>
+							<p>{{food.description}}</p>
+							<h5>$ {{food.price}}</h5>
 						</div>
 					</div>
 				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-02.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-03.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $10.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid lunch">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-04.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Lunch 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $15.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid lunch">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-05.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Lunch 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $18.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid lunch">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-06.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Lunch 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $20.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-07.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Dinner 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $25.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-08.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Dinner 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $22.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-09.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Dinner 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $24.79</h5>
-						</div>
-					</div>
-				</div>
-				
-			</div>
+				{% endfor %}
+			
+			
 		</div>
 	</div>
-	<!-- End Menu -->
+</div>
 	
 	<!-- Start QT -->
 	<div class="qt-box qt-background">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 ml-auto mr-auto text-left">
-					<p class="lead ">
-						" If you're not the one cooking, stay out of the way and compliment the chef. "
-					</p>
-					<span class="lead">Michael Strahan</span>
 				</div>
 			</div>
 		</div>

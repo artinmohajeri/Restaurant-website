@@ -1,6 +1,6 @@
-from django.shortcuts import render,get_object_or_404
-from .models import Category, Contact, Foods,Reservation,Blog,Tag,Comment
-from .forms import CommentForm, ContactForm, ReservationForm
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import Category, Contact, Foods, Reply,Reservation,Blog,Tag,Comment,Gallery,Stuff
+from .forms import CommentForm, ContactForm, ReplyForm, ReservationForm
 from random import randint
 from django.core.paginator import Paginator
 # Create your views here.
@@ -50,7 +50,7 @@ def blog(request):
     blogs = Blog.objects.all()
     default = range(1,5)
 
-    paginator = Paginator(blogs, 1)
+    paginator = Paginator(blogs, 6)
     page = request.GET.get('page')
     blog_list = paginator.get_page(page)
     
@@ -69,15 +69,9 @@ def contact(request):
     contact_form = ContactForm()
     if request.method == "POST":
         contact_form = ContactForm(request.POST)
-
         if contact_form.is_valid():
-            name = contact_form.cleaned_data["name"]
-            email = contact_form.cleaned_data["email"]
-            numbers = contact_form.cleaned_data["number_of_people"]
-            message = contact_form.cleaned_data["message"]
+            contact_form.save()
 
-            new_contact = Contact(name=name, email=email, message=message, number_of_people=numbers)
-            new_contact.save()
     else:
         contact_form = ContactForm()
 
@@ -85,26 +79,33 @@ def contact(request):
 
     }
 
-    return render(request,'food/contact.html',{})
+    return render(request,'food/contact.html',context)
 
 #___________________________________________________________________________________________________________
 
 
 def gallery(request):
-    return render(request,'food/gallery.html',{})
+    pics = Gallery.objects.all()
+    return render(request,'food/gallery.html',{'pics':pics})
 
 #___________________________________________________________________________________________________________
 
 
 def index(request):
-    food = Foods.objects.all()[:20]
-    return render(request,'food/index.html',{'foods':food})
+    food = Foods.objects.all()[:9]
+    pics = Gallery.objects.all()[:6]
+    return render(request,'food/index.html',{'foods':food,'pics':pics})
 
 #___________________________________________________________________________________________________________
 
 
 def menu(request):
-    return render(request,'food/menu.html',{})
+    foods = Foods.objects.all()
+
+    context = {
+        'foods':foods
+    }
+    return render(request,'food/menu.html',context)
 
 #___________________________________________________________________________________________________________
 
@@ -125,7 +126,12 @@ def reservation(request):
 
 
 def stuff(request):
-    return render(request,'food/stuff.html',{})
+    worker = Stuff.objects.all()
+
+    context = {
+        'stuff':worker,
+    }
+    return render(request,'food/stuff.html',context)
 
 #___________________________________________________________________________________________________________
 
@@ -169,6 +175,25 @@ def search(request):
 
 #___________________________________________________________________________________________________________
 
+def reply(request, id):
+    comment = get_object_or_404(Comment, id=id)
+    replies = Reply.objects.all().filter(comment=comment)
+
+    reply_form = ReplyForm()
+    if request.method == "POST":
+        reply_form = ReplyForm(request.POST)
+        if reply_form.is_valid():
+            reply_form.save()
+            return redirect('blog')
+        
+    else:
+        reply_form = ReplyForm()
+
+    context={
+        "replies":replies
+    }
+
+    return render(request,'food/reply.html',context)
 
 
 

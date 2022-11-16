@@ -1,7 +1,13 @@
+from email.policy import default
 from tkinter import CASCADE
 from django.db import models
 from random import randint
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+
+
+
+
 # Create your models here.
 
 
@@ -39,7 +45,7 @@ class Reservation(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=500)
     date = models.DateField(auto_now_add=True)
-    body = models.TextField()
+    body = RichTextField(default='your blog text!')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='food/', null=True, blank=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="blog", blank=True, null=True)
@@ -93,3 +99,40 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.name}  |  {self.email}  |  {self.message[:50]}"
+
+
+# _________________________________________________________________________________________________________
+
+class Reply(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    time = models.TimeField(auto_now_add=True, auto_now=False)
+    show_text = models.BooleanField(default=False)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.name}  |  {self.email}  |  {self.message[:50]}"
+
+
+# _________________________________________________________________________________________________________
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='food/',)
+
+    def __str__(self):
+        return f"{self.image}"
+
+
+# _________________________________________________________________________________________________________
+
+
+class Stuff(models.Model):
+    name = models.CharField(max_length=100)
+    job = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=30, default="+01", blank=True, null=True)
+    image = models.ImageField(upload_to='food/',default='pic/worker.jpg', blank=True, null=True,)
+
+    def __str__(self):
+        return f"{self.name}  |  {self.job}"

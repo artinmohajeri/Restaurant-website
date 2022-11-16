@@ -116,7 +116,7 @@
 									<li><i class="zmdi zmdi-time"></i>date : <span>{{blog.date}}</span></li>
 								</ul>
 								<blockquote>
-								<p>{{blog.body}}</p>
+								<p>{{blog.body|safe}}</p>
 								</blockquote>
 							</div>
 						</div>
@@ -138,28 +138,34 @@
 									<div class="des-l">
 										<p>{{comment.message}}</p>
 									</div>
-									<a href="#" class="right-btn-re"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
+									<a href="{% url 'reply' id=comment.id %}" id="scroll-to-bottom" class="right-btn-re"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
 								</div>
 							</div>
 							{% endif %}
 							{% endfor %}
-							{% comment %} <div class="comment-item children">
-								<div class="comment-item-left">
-									<img src="{% static 'images/avt-img.jpg' %}" alt="">
+							<!-- start reply -->
+							{% for reply in replies %}
+								<div class="comment-item children">
+									<div class="comment-item-left">
+										<img src="{% static 'images/avt-img.jpg' %}" alt="">
+									</div>
+									<div class="comment-item-right">
+										<div class="pull-left">
+											<a href="#">Admin</a>
+										</div>
+										<div class="pull-right">
+											<i class="fa fa-clock-o" aria-hidden="true"></i>Time : <span>1.30 pm</span>
+										</div>
+										<div class="des-l">
+											<p>Morbi lacinia ultrices lorem id tincidunt. Cras id dui risus. Pellentesque consectetur id mi sed pharetra. Proin imperdiet gravida nisl, sit amet varius urna. In auctor.</p>
+										</div>
+										<a href="#" class="right-btn-re"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
+									</div>
 								</div>
-								<div class="comment-item-right">
-									<div class="pull-left">
-										<a href="#">Admin</a>
-									</div>
-									<div class="pull-right">
-										<i class="fa fa-clock-o" aria-hidden="true"></i>Time : <span>1.30 pm</span>
-									</div>
-									<div class="des-l">
-										<p>Morbi lacinia ultrices lorem id tincidunt. Cras id dui risus. Pellentesque consectetur id mi sed pharetra. Proin imperdiet gravida nisl, sit amet varius urna. In auctor.</p>
-									</div>
-									<a href="#" class="right-btn-re"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
-								</div>
-							</div> {% endcomment %}
+							{% endfor %}
+							<!-- end reply -->
+
+							
 						</div>
 						<div class="comment-respond-box">
 							<h3>Leave your comment </h3>
@@ -180,7 +186,7 @@
 										</div>
 									</div>
 									<div class="col-lg-12 col-md-12 col-sm-12">
-										<button class="btn btn-submit" type='submit'>Send comment</button>
+										<a href="" id='bttn' name='bttn'><button class="btn btn-submit" type='submit'>Send comment</button></a>
 									</div>
 								</form>
 							</div>

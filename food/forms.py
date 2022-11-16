@@ -1,5 +1,5 @@
 from django import forms
-from .models import Reservation,Comment,Contact
+from .models import Reservation,Comment,Contact,Reply
 
 class ReservationForm(forms.ModelForm):
     class Meta:
@@ -11,6 +11,14 @@ class ReservationForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
+        fields= ["name", "email", "message",]
+
+# __________________________________________________________________
+
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
         fields= ["name", "email", "message",]
 
 # __________________________________________________________________

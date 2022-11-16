@@ -111,13 +111,12 @@
 								<li>|</li>
 								<li><span>{{blog.date}}</span></li>
 							</ul>
-							<p>{{blog.body | truncatewords:40}}</p>
+							<p>{{blog.body | truncatewords:40 | safe}}</p>
 							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog_details' id=blog.id %}">Read More</a>
 						</div>
 					</div>
 				</div>
 				{% endfor %}
-				
 			</div>
 		</div>
 	</div>
