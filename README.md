@@ -1,5 +1,5 @@
 ## This project is a dynamic website using HTML CSS JS & python(Django) for backend.
-**Restaurant-website**
+**Restaurant-website.**
 
 **this is a website for yamifood restaurant.**
 
